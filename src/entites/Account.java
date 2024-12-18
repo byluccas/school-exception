@@ -1,5 +1,7 @@
 package entites;
 
+import model.exceptions.BusinessException;
+
 public class Account {
 
 	private Integer number;
@@ -54,20 +56,27 @@ public class Account {
 	}
 
 	public void withdraw(Double amount) {
+		validateWithdraw(amount);
 		balance -= amount;
 	}
 
-	public String validateWithdraw(double amount) {
+	public void validateWithdraw(double amount) {
 
 		if (amount > getWithdrawLimit()) {
-			return "Error of withdraw: quantity exced the limit of balance ";
-		} 
-		else if (amount > getBalance()) {
-			return "Error of withdraw: balance insufficient";
+			throw new BusinessException("Error of withdraw: quantity exced the limit of balance");
 		}
+		if (amount > getBalance()) {
+			throw new BusinessException("Error of withdraw: balance insufficient");
+		}
+		
+		
+		
+	}
 
-		return null;
-
+	@Override
+	public String toString() {
+		return "Account [number=" + number + ", holder=" + holder + ", balance=" + balance + ", withdrawLimit="
+				+ withdrawLimit + "]";
 	}
 
 }
