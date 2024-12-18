@@ -8,7 +8,6 @@ public class Account {
 	private Double withdrawLimit;
 
 	public Account() {
-
 	}
 
 	public Account(Integer number, String holder, Double balance, Double withdrawLimit) {
@@ -55,6 +54,20 @@ public class Account {
 	}
 
 	public void withdraw(Double amount) {
-		balance -= amount; 
+		balance -= amount;
 	}
+
+	public String validateWithdraw(double amount) {
+
+		if (amount > getWithdrawLimit()) {
+			return "Error of withdraw: quantity exced the limit of balance ";
+		} 
+		else if (amount > getBalance()) {
+			return "Error of withdraw: balance insufficient";
+		}
+
+		return null;
+
+	}
+
 }

@@ -29,14 +29,13 @@ public class Program {
 		System.out.print("infome the amount to widraw: ");
 		Double enterQuantityWithdraw = sc.nextDouble();
 
-		if (enterQuantityWithdraw > account.getWithdrawLimit()) {
-			System.out.println("Error of withdraw: quantity exced the limit of balance ");
-		} 
-		else if (enterQuantityWithdraw > account.getBalance()) {
-			System.out.println("Error of withdraw: balance insufficient");
-		} 
+		String errorBalance = account.validateWithdraw(enterQuantityWithdraw);
+		
+		if(errorBalance != null) {
+			System.out.println("error" + errorBalance);
+		}
 		else {
-			account.withdraw(enterLimitBalance);
+			account.withdraw(enterQuantityWithdraw);
 			System.out.printf("New Balance: %.2f", account.getBalance());
 		}
 
