@@ -23,15 +23,22 @@ public class Program {
 		Double enterLimitBalance = sc.nextDouble();
 
 		Account account = new Account(enterNumberHolderAccount, enterHolderAccount, enterBalanceInitial,
-				enterBalanceInitial);
-
+				enterLimitBalance);
+		
 		System.out.println();
 		System.out.print("infome the amount to widraw: ");
-		Double enterQuantityWidraw = sc.nextDouble();
+		Double enterQuantityWithdraw = sc.nextDouble();
 
-		account.withdraw(enterQuantityWidraw);
-
-		System.out.printf("New Balance: %.2f", account.getBalance());
+		if (enterQuantityWithdraw > account.getWithdrawLimit()) {
+			System.out.println("Error of withdraw: quantity exced the limit of balance ");
+		} 
+		else if (enterQuantityWithdraw > account.getBalance()) {
+			System.out.println("Error of withdraw: balance insufficient");
+		} 
+		else {
+			account.withdraw(enterLimitBalance);
+			System.out.printf("New Balance: %.2f", account.getBalance());
+		}
 
 		sc.close();
 
